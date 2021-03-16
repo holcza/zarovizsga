@@ -26,19 +26,23 @@ public class DogTypes {
             country = country.toUpperCase();
             stmt.setString(1, country);
 
-            try (
-                    ResultSet rs = stmt.executeQuery();
-            ) {
-                while (rs.next()) {
-                    String name = rs.getString("name");
-                    dogtypesByCountry.add(name.toLowerCase());
-                }
-                dogtypesByCountry.sort(Collator.getInstance(new Locale("hu", "HU")));
-                return dogtypesByCountry;
-            }
+            listDogsFromResult(dogtypesByCountry, stmt);
+            return dogtypesByCountry;
         } catch (SQLException sqle) {
             throw new IllegalArgumentException("Error by select", sqle);
         }
 
+    }
+
+    private void listDogsFromResult(List<String> dogtypesByCountry, PreparedStatement stmt) throws SQLException {
+        try (
+                ResultSet rs = stmt.executeQuery();
+        ) {
+            while (rs.next()) {
+                String name = rs.getString("name");
+                dogtypesByCountry.add(name.toLowerCase());
+            }
+            dogtypesByCountry.sort(Collator.getInstance(new Locale("hu", "HU")));
+        }
     }
 }
