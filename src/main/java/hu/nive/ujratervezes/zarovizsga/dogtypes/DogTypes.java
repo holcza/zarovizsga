@@ -11,12 +11,13 @@ import java.util.Locale;
 public class DogTypes {
 
     private MariaDbDataSource dataSource;
+
     public DogTypes(MariaDbDataSource dataSource) {
         this.dataSource = dataSource;
     }
 
-    public List<String> getDogsByCountry(String country){
-        List<String>dogtypesByCountry = new ArrayList<>();
+    public List<String> getDogsByCountry(String country) {
+        List<String> dogtypesByCountry = new ArrayList<>();
         try (
                 Connection conn = dataSource.getConnection();
                 PreparedStatement stmt =
@@ -32,7 +33,7 @@ public class DogTypes {
                     String name = rs.getString("name");
                     dogtypesByCountry.add(name.toLowerCase());
                 }
-                dogtypesByCountry.sort(Collator.getInstance(new Locale("hu","HU")));
+                dogtypesByCountry.sort(Collator.getInstance(new Locale("hu", "HU")));
                 return dogtypesByCountry;
             }
         } catch (SQLException sqle) {
