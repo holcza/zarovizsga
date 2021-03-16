@@ -1,6 +1,6 @@
 package hu.nive.ujratervezes.zarovizsga.kennel;
 
-public class Husky extends Dog{
+public class Husky extends Dog {
 
     public Husky(String name) {
         super(name);
@@ -13,6 +13,6 @@ public class Husky extends Dog{
 
     @Override
     public void play(int hours) {
-        setHappiness(hours*3);
+        setHappiness(hours * 3);
     }
 }
